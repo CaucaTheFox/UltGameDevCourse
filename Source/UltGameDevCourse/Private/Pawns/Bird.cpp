@@ -1,12 +1,16 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
-
-#include "UltGameDevCourse/Public/Pawns/Bird.h"
-
+﻿#include "UltGameDevCourse/Public/Pawns/Bird.h"
+#include "Components/CapsuleComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 
 ABird::ABird()
 {
 	PrimaryActorTick.bCanEverTick = true;
+
+	capsuleCollider = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleCollider"));
+	SetRootComponent(capsuleCollider);
+
+	skeletalMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("SkeletalMesh"));
+	skeletalMesh->SetupAttachment(GetRootComponent());
 }
 
 void ABird::BeginPlay()

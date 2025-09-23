@@ -1,10 +1,12 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
-#pragma once
+﻿#pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Bird.generated.h"
+
+// forward declarations
+class UCapsuleComponent;
+class USkeletalMeshComponent;
 
 UCLASS()
 class ULTGAMEDEVCOURSE_API ABird : public APawn
@@ -20,4 +22,11 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+
+private:
+	UPROPERTY(VisibleAnywhere)
+	UCapsuleComponent* capsuleCollider;
+
+	UPROPERTY(VisibleAnywhere)
+	USkeletalMeshComponent* skeletalMesh;
 };
