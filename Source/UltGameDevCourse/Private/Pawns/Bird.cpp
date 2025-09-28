@@ -19,7 +19,6 @@ ABird::ABird()
 
 	cameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
 	cameraBoom->SetupAttachment(capsuleCollider);
-	cameraBoom->TargetArmLength = 200.f;
 
 	camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	camera->SetupAttachment(cameraBoom);
@@ -52,6 +51,16 @@ void ABird::Move(const FInputActionValue& value)
 	}
 }
 
+inline void ABird::Look(const FInputActionValue& value)
+{
+	const FVector2d lookAxisValue = value.Get<FVector2d>();
+	if (Controller)
+	{
+		AddControllerYawInput(lookAxisValue.X);
+		AddControllerPitchInput(lookAxisValue.Y);
+	}
+}
+
 void ABird::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -64,5 +73,6 @@ void ABird::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	if (UEnhancedInputComponent* enhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		enhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ABird::Move);
+		enhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ABird::Look);
 	}
 }

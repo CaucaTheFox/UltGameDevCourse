@@ -29,9 +29,13 @@ protected:
 	UInputMappingContext* InputMappingContext;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input)
 	UInputAction* MoveAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input)
+	UInputAction* LookAction;
 	
 	virtual void BeginPlay() override;
+	
 	void Move(const FInputActionValue& value);
+	void Look(const FInputActionValue& value);
 	
 private:
 	UPROPERTY(VisibleAnywhere)
@@ -43,5 +47,4 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	UCameraComponent* camera;
 };
-
 
