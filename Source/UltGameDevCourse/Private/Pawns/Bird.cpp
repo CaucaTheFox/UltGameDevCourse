@@ -26,6 +26,22 @@ ABird::ABird()
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
 }
 
+void ABird::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+}
+
+void ABird::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	if (UEnhancedInputComponent* enhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
+	{
+		enhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ABird::Move);
+		enhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ABird::Look);
+	}
+}
+
 void ABird::BeginPlay()
 {
 	Super::BeginPlay();
@@ -38,7 +54,6 @@ void ABird::BeginPlay()
 			subSystem->AddMappingContext(InputMappingContext, 0); 
 		}
 	}
-	
 }
 
 void ABird::Move(const FInputActionValue& value)
@@ -58,21 +73,5 @@ inline void ABird::Look(const FInputActionValue& value)
 	{
 		AddControllerYawInput(lookAxisValue.X);
 		AddControllerPitchInput(lookAxisValue.Y);
-	}
-}
-
-void ABird::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-}
-
-void ABird::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-	if (UEnhancedInputComponent* enhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
-	{
-		enhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ABird::Move);
-		enhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ABird::Look);
 	}
 }
