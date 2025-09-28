@@ -6,8 +6,12 @@
 #include "CustomCharacter.generated.h"
 
 // forward declarations
+class UCapsuleComponent;
+class USkeletalMeshComponent;
 class UInputMappingContext;
 class UInputAction;
+class UCameraComponent;
+class USpringArmComponent;
 
 UCLASS()
 class ULTGAMEDEVCOURSE_API ACustomCharacter : public ACharacter
@@ -32,4 +36,15 @@ protected:
 	
 	void Move(const FInputActionValue& value);
 	void Look(const FInputActionValue& value);
+	
+private:
+	UPROPERTY(VisibleAnywhere)
+	UCapsuleComponent* capsuleCollider;
+	UPROPERTY(VisibleAnywhere)
+	USkeletalMeshComponent* skeletalMesh;
+	UPROPERTY(VisibleAnywhere)
+	USpringArmComponent* cameraBoom;
+	UPROPERTY(VisibleAnywhere)
+	UCameraComponent* camera;
+	
 };

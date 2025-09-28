@@ -1,13 +1,26 @@
 ﻿#include "Characters/CustomCharacter.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "Components/InputComponent.h"
-#include "EnhancedInputComponent.h"
+#include "GameFramework/SpringArmComponent.h"
+#include "Camera/CameraComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "EnhancedInputComponent.h"
 
 class UEnhancedInputLocalPlayerSubsystem;
 
 ACustomCharacter::ACustomCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
+
+	bUseControllerRotationPitch = false;
+	bUseControllerRotationYaw = false;
+	bUseControllerRotationRoll = false;
+	
+	cameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
+	cameraBoom->SetupAttachment(GetRootComponent());
+
+	camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
+	camera->SetupAttachment(cameraBoom);
 }
 
 void ACustomCharacter::Tick(float DeltaTime)
