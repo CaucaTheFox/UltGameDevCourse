@@ -40,8 +40,20 @@ protected:
 private:
 	UPROPERTY(VisibleAnywhere)
 	UCapsuleComponent* capsuleCollider;
+	
 	UPROPERTY(VisibleAnywhere)
 	USkeletalMeshComponent* skeletalMesh;
+	UPROPERTY(VisibleAnywhere)
+	USkeletalMeshComponent* hairMesh;
+	UPROPERTY(VisibleAnywhere)
+	USkeletalMeshComponent* faceMesh;
+	UPROPERTY(VisibleAnywhere)
+	USkeletalMeshComponent* upperBodyMesh;
+	UPROPERTY(VisibleAnywhere)
+	USkeletalMeshComponent* lowerBodyMesh;
+	UPROPERTY(VisibleAnywhere)
+	USkeletalMeshComponent* shoesMesh;
+	
 	UPROPERTY(VisibleAnywhere)
 	USpringArmComponent* cameraBoom;
 	UPROPERTY(VisibleAnywhere)
